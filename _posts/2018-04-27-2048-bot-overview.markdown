@@ -4,4 +4,6 @@ title:  "A Raspberry Pi Bot to Play 2048"
 date:   2018-04-27 14:28:41 +0200
 ---
 
+Test video insert
+#<video src="video.mp4" width="320" height="200" controls preload></video>
 
