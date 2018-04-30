@@ -14,11 +14,11 @@ A while back I received a Raspberry Pi as a present. After a bit of procrastinat
  2. Take the info extracted in 1. and decide what move should be executed next (up, down, left, right).
  3. With the use of some (hopefully) simple mechanism input the action decided in 2. on a standard keyboard (e.g. by pressing an arrow key).
 
- ### Part 1: processing an image with a 2048 game grid.
+ # Part 1: processing an image with a 2048 game grid.
 
 
 
- 
+
 
 #<video src="video.mp4" width="320" height="200" controls preload></video>
 
