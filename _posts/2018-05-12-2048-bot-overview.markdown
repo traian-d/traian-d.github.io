@@ -147,4 +147,6 @@ In practice, running everything on the Raspberry Pi and overlaying the results i
 <video src="/assets/longer_demo.mp4" width="640" height="360" controls preload></video>
 </div>
 
-You can see that it takes a couple of seconds for the whole algorithm to pick up a change in the position of the grid in the frame, or of the grid layout itself. However, there is some room for optimization since sometimes I perform some redundant image transformations.
+You can see that it takes a couple of seconds for the whole algorithm to pick up a change in the position of the grid in the frame, or of the grid layout itself. However, there is some room for optimization since sometimes I perform redundant image transformations. You can also see that in one or two instances some numbers are not correctly picked up. In principle this is not a big problem since it's relatively easy to adjust the monitor position so that all numbers are well seen.
+
+All the code for this project is available on [GitHub](https://github.com/traian-d/2048_game_bot).
