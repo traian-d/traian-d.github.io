@@ -1,0 +1,150 @@
+---
+layout: post
+title:  "A 2048 Pi Bot"
+date:   2018-05-12 14:28:41 +0200
+---
+
+
+A while back I received a Raspberry Pi as a present. After a bit of procrastination and attempts at some classic hobby projects I got the idea that it would be pretty cool to make a Raspberry Pi robot that plays the [2048 game](https://gabrielecirulli.github.io/2048/). The idea is to end up with a completely self-contained little bot that you can point at a screen with 2048 running on it and that will be able to capture the live images, interpret them, come up with the best move to make and execute that move (via some output device).
+
+ Overall there are three main tasks to deal with in this project:
+ 1. Find a way to identify and extract the game grid with the correct numbers from an image (static photo or frame captured from a live video).
+ 2. Take the info extracted in 1. and decide what move should be executed next (up, down, left, right).
+ 3. With the use of some (hopefully) simple mechanism input the action decided in 2. on a standard keyboard (e.g. by pressing an arrow key).
+
+### Part 1: Processing an image containing a 2048 game grid.
+
+The goal here would be to start with an image like this:
+
+<div style="text-align:center;margin:20px 0px">
+<img src="/assets/image403.jpg">
+</div>
+
+and extract out of it a matrix containing all the numbers in the 2048 game grid in their corresponding positions.
+
+In the beginning I was thinking of trying a deep learning approach to ideally perform this whole process in one cleverly engineered step. However I soon realized that although it would be cool to deep-dive into deep learning, it's very likely that my efforts would not pan out. I was especially worried that applying a complex algorithm on the raw image would require lots of training data and tricky architecture work that would take way too much time to do right.
+
+Eventually I settled on exploring and utilizing the somewhat less hip, but still completely new to me, world of (classic) computer vision. I did my work in Python using mostly the OpenCV library and a bit of sk-learn towards the end.
+OpenCV seems to be the go to library for a lot of image processing tasks. It's fast, highly comprehensive and there are quite some learning resources out there for it. In particular more than once I relied on  Adrian Rosebrock's detailed tutorials at [www.pyimagesearch.com](https://www.pyimagesearch.com/start-here-learn-computer-vision-opencv/).
+
+I broke up my process in the following steps:
+1. Collect sufficient training/test data. 
+2. Detect where the game grid is in the picture.
+3. Perform a perspective transformation of the identified grid such that it's contour becomes fully rectangular.
+4. Split the transformed grid into its composing cells.
+5. For each cell identify what regions contain digits.
+6. Use a simple MLP to figure out the digits contained in the regions identified in 4.
+7. Put it all back together.
+
+#### Collecting the data
+
+For this project I took about 500 photos of a computer screen that was displaying the 2048 game grid. I altered the orientation of the screen, the nature and orientation of the light source (natural or artificial, from the left or the right), as well as the state of the game. Overall I ended up with 500-600 data points for each digit from 0 to 9. In order to get a representative dataset you should ideally include more sources of variation than I did (for one you should add samples from different types of monitors), but doing so also becomes logistically difficult and very time consuming.
+
+
+#### Detecting the game grid
+
+I did this by first performing Canny edge detection on a blurred, gray-scaled version of the original image:
+
+```python
+#...
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+filtered = cv2.bilateralFilter(gray, 11, 13, 13)
+return cv2.Canny(gray, 25, 14)
+
+```
+
+Once I had the edges I looked for contours and kept those that were (approximately) quadrangles:
+
+```python
+#...
+contours = cv2.findContours(edges.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+contours = sorted(contours, key=cv2.contourArea, reverse=True)
+#...
+output_contours = []
+for c in contours:
+    # Approximate the contour
+    peri = cv2.arcLength(c, True)
+    approx = cv2.approxPolyDP(c, 0.02 * peri, True)
+    if len(approx) == 4:
+        output_contours.append(approx)
+```
+
+At this stage I considered that the largest quadrangular contour identified was my best candidate for the game grid. I verified this assumption by checking that the candidate contour had inside of it other contours that would roughly correspond to the 2048 game cells. If this was not the case (e.g. candidate contour had no other contours inside, or the nested contours were not rectangular) then I would conclude that the image did not contain the game grid.
+
+So far, the original image has been processed to the following (in bold you can see the identified grid contour):
+
+
+<div style="text-align:center;margin:20px 0px">
+<img src="/assets/contour_on_edges.jpg">
+</div>
+
+
+#### Transforming the grid, extracting the cells and the numbers
+
+Once the grid was identified, I warped the contour to get it to a rectangular shape, using an idea from [www.pyimagesearch.com](https://www.pyimagesearch.com/2014/05/05/building-pokedex-python-opencv-perspective-warping-step-5-6/):
+
+```python
+#...
+# quad is a custom object containing information about the grid contour
+max_width = int(max(quad.top, quad.bottom))
+max_height = int(max(quad.left, quad.right))
+#...
+M = cv2.getPerspectiveTransform(quad.array_form(), dst)
+#...
+warped_image = cv2.warpPerspective(image, M, (max_width, max_height))
+```
+
+This yields the following:
+
+<div style="text-align:center;margin:20px 0px">
+<img src="/assets/warped_game_grid.jpg">
+</div>
+
+In this image it's quite easy to identify the exact position of each game cell since I know exactly what the relative cell and border dimensions are (it can be found out by doing an inspect element on the 2048 game site). The procedure is quite tedious and it involves a bunch of hard-coded coordinates, so I won't go into it in detail.
+
+Once I split the grid into cells, I needed to figure out what number (if any) is in each cell. This task is trickier than it seems since you don't know in advance how many digits your number is made up of. First I briefly considered simply feeding the cells into some sort of neural network to classify multi-digit numbers as a single unit. This approach is fast but has the downside that it can't recognize numbers that are not in your training set. I therefore started thinking about a way to split a larger number into its composing digits in order to classify each digit independently.
+
+I was quite successful using clustering or contour detection or even blob detection. However for all of these approaches there were some cases in my training set where the number digits would be connected by one pixel or two and would therefore be lumped in the same cluster/contour. The thing with such unsupervised approaches is that they are too general. They don't work with the restrictions that are present in our dataset. 
+
+We don't want to detect any kind of cluster/contour/blob corresponding to any kind of digit written in any way possible. We know that we need to detect numbers that will always be written in the same machine font and that will always be spaced and centered in the same way. Taking these restrictions into account, in a binarized image of the number (which in python is a numpy array) I simply counted how many white pixels there were on each row and column. This way a region containing a digit will show up as a continuous set of columns/rows with white pixels separated by columns/rows with only black pixels. In order to avoid the trap from before I counted columns/rows that had fewer than 3-4 white pixels as being black columns/rows. This way I got very reliable bounding boxes for the regions in an image that contained a substantial number of white pixels.
+
+Once this step is over, you will (hopefully) end up with a number of distinct images, each containing a single digit:
+
+<div style="text-align:center;margin:20px 0px">
+<img src="/assets/isolated_digits.png">
+</div>
+
+#### Classifying the digits and putting everything back together
+
+As it turns out, once you have produced a clean dataset of single digits the classification task is quite easy.
+I performed a 70-30 train/test random split of the dataset and assessed model performance using the mean accuracy score.
+Since there is relatively little variation between the input images a simple MLP with 20 neurons in the hidden layer gave perfect classification results:
+
+```python
+#...
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+#...
+mlp = MLPClassifier(hidden_layer_sizes=(20,), max_iter=15, alpha=1e-4,
+                    solver='sgd', verbose=10, tol=1e-5, random_state=1,
+                    learning_rate_init=.1)
+
+mlp.fit(X_train, y_train)
+print("Training set score: %f" % mlp.score(X_train, y_train))
+print("Test set score: %f" % mlp.score(X_test, y_test))
+```
+
+One issue that popped up in practice, and that I will have to deal with in a following iteration, is that of false positives. The model is very good at picking up the correct numbers if they exist, but on occasion also wrongly detects numbers in empty cells. This is because glare and specks of dust can create clusters of white pixels in the thresholded image that will eventually be classified as digits. This can be mitigated by adding another class on top of the 0-9 digits that will include various patterns that should not be classified as digits at all.
+
+Overlapping model predictions on the original image, the end result is as follows:
+
+<div style="text-align:center;margin:20px 0px">
+<img src="/assets/predicted_numbers.jpg">
+</div>
+
+In practice, running everything on the Raspberry Pi and overlaying the results in real time looks something like this:
+
+<div style="text-align:center;margin:20px 0px">
+<video src="/assets/longer_demo.mp4" width="640" height="360" controls preload></video>
+</div>
+
+You can see that it takes a couple of seconds for the whole algorithm to pick up a change in the position of the grid in the frame, or of the grid layout itself. However, there is some room for optimization since sometimes I perform some redundant image transformations.

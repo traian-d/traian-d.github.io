@@ -1,8 +1,9 @@
-title: traian-d blog
+title: "traian-d blog"
 description: >- # this means to ignore newlines until "baseurl:"
   Projects, ideas and comments in machine learning, statistics and software engineering.
 baseurl: ""
 url: "http://traian-d.github.io"
+github_username: "traian-d"
 
 # Build settings
 markdown: kramdown
