@@ -4,7 +4,7 @@ title:  "A toolbox for cellular automata"
 date:   2018-12-11 23:13:41 +0200
 ---
 
-I will come out and say it: I like engineering software. I still have a lot to learn, but I enjoy thinking about software architecture, about abstracting things out, generalizing algorithms, code reuse, testability etc. In my daily work this often puts me at odds with some senior guys in the company, who tend to think that everything beyond procedural-style code with endlessly nested if/else statements is over-engineering.
+I will come out and say it: I like engineering software. I still have a lot to learn, but I enjoy thinking about software architecture, about abstracting things out, generalizing algorithms, code reuse, testability etc. In my daily work this often puts me at odds with those who tend to think that everything beyond procedural-style code with endlessly nested if/else statements is over-engineering.
 
 However, nobody can really prevent me from engineering things in my spare time :D
 In particular, for a long time I've been interested in the potential for building a concise and comprehensive framework to express a wide range of [cellular automata](https://en.wikipedia.org/wiki/Cellular_automaton). 
