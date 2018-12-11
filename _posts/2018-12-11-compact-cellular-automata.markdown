@@ -110,7 +110,7 @@ For more spectacular visuals you can run a [methuselah](https://en.wikipedia.org
 <img src="/assets/compact_cell_automata/acorn_game.gif">
 </div>
 
-With a bit of tweaking game states can be displayed additively. This is particularly useful for one-line topologies such as that used in [Rule 30](https://en.wikipedia.org/wiki/Rule_30):
+With a bit of tweaking, game states can be displayed additively. This is particularly useful for one-line topologies such as that used in [Rule 30](https://en.wikipedia.org/wiki/Rule_30):
 
 <div style="text-align:center;margin:20px 0px">
 <img src="/assets/compact_cell_automata/rule30.gif">
