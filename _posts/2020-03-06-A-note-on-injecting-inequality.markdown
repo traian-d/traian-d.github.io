@@ -29,8 +29,8 @@ For $$X \sim N(\mu, \sigma^{2})$$ and $$g(X) = a + bX$$ this will yield a transf
 We can quickly verify this by drawing 10000 samples from $$X \sim N(0, 1)$$ and applying the respective transformations.
 
 <table>
-	<th>$$Y = a + bX$$</th>
-	<th>$$Y = e^{X}$$</th>
+	<th>Y = a + bX</th>
+	<th>Y = exp(X)</th>
 	<tr>
 		<td>
 			<div style="text-align:center;margin:20px 0px">
