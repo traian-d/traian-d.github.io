@@ -78,11 +78,11 @@ $$
 
 ### Cosines and Correlations
 
-Already from the way we can rewrite the cosine of $\theta$ you sense a resemblance with the Pearson correlation coefficient. More than than, for random variables it can be shown that the set of real-valued random variables of finite variance forms an inner product space with the covariance operation $$\langle X, Y \rangle := \mathbb{E}[X, Y]$$. This means that for two random variables we can write the correlation coefficient as:
+Already from the way we can rewrite the cosine of $\theta$ you sense a resemblance with the Pearson correlation coefficient. More than than, for random variables it can be shown that the set of real-valued random variables of finite variance forms an inner product space with the operation $$\langle X, Y \rangle := \mathbb{E}[X Y]$$. This means that for two random variables we can write the correlation coefficient as:
 
 $$
 \begin{align*}
-\rho_{X, Y} &= \frac{\mathbb{E}[X - \mu_X, Y - \mu_Y]}{\sqrt{\mathbb{E}[(X - \mu_X)^2]\mathbb{E}[(Y - \mu_Y)^2]}} \\
+\rho_{X, Y} &= \frac{\mathbb{E}[(X - \mu_X)(Y - \mu_Y)]}{\sqrt{\mathbb{E}[(X - \mu_X)^2]\mathbb{E}[(Y - \mu_Y)^2]}} \\
 			&= \frac{\langle X - \mu_X, Y - \mu_X \rangle}{\|X - \mu_X\|\|Y - \mu_Y\|}
 \end{align*}
 $$
@@ -117,14 +117,14 @@ $$
 					 &= \langle \rho_{X, Y} X, \rho_{X, Z} X\rangle + \\	
 					 &\quad \langle \rho_{X, Y} X, (Z - \rho_{X, Z} X) \rangle + \langle (Y - \rho_{X, Y} X), \rho_{X, Z} X \rangle + \\
 					 &\quad \langle (Y - \rho_{X, Y} X), (Z - \rho_{X, Z} X) \rangle\\
-					 &= \rho_{X, Y}\rho_{X, Z} + \langle (Y - \rho_{X, Y} X), (Z - \rho_{X, Z} X) \rangle
+					 &= \rho_{X, Y}\rho_{X, Z} + \langle Y - \rho_{X, Y} X, Z - \rho_{X, Z} X \rangle
 \end{align*}
 $$
 
 The only thing we need to clear up is exactly what the limits of the second term might be. For this we can apply the Cauchy-Schwarz inequality to it:
 
 $$
-|\langle (Y - \rho_{X, Y} X), (Z - \rho_{X, Z} X) \rangle| \leq \|Y - \rho_{X, Y} X\|\|Z - \rho_{X, Z} X\|
+|\langle Y - \rho_{X, Y} X, Z - \rho_{X, Z} X \rangle| \leq \|Y - \rho_{X, Y} X\|\|Z - \rho_{X, Z} X\|
 $$
 
 Developing the first term on the right side gives:
