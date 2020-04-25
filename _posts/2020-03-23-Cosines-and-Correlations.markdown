@@ -78,7 +78,7 @@ $$
 
 ### Cosines and Correlations
 
-Already from the way we can rewrite the cosine of $\theta$ you sense a resemblance with the Pearson correlation coefficient. More than than, for random variables it can be shown that the set of real-valued random variables of finite variance forms an inner product space with the operation $$\langle X, Y \rangle := \mathbb{E}[X Y]$$. This means that for two random variables we can write the correlation coefficient as:
+A resemblance with the Pearson correlation coefficient can already be seen in the way we rewrite the cosine of $\theta$. More than that, it can be shown that the set of real-valued random variables of finite variance forms an inner product space with the operation $$\langle X, Y \rangle := \mathbb{E}[X Y]$$. This means that for two random variables we can write the correlation coefficient as:
 
 $$
 \begin{align*}
