@@ -68,7 +68,7 @@ $$
 
 ### The Archimedean Family
 
-For $\phi :[0, 1] \rightarrow [0, \infty]$ a continuous, strictly decreasing, convex function with $\phi(0)=+\infty$, $\phi(1)=0$, an 2-dimensional Archimedean copula is a copula of the form:
+For $\phi :[0, 1] \rightarrow [0, \infty]$ a continuous, strictly decreasing, convex function with $\phi(0)=+\infty$, $\phi(1)=0$, a 2-dimensional Archimedean copula is a copula of the form:
 
 $C(u, v) = \phi^{-1}(\phi(u) + \phi(v))$
 
@@ -178,15 +178,7 @@ The downside of taking the easy route for sampling is that things become more an
 
 I've played around a little bit with different copula structures. It's interesting to note that simulation performance degrades very quickly if the outer $\theta$ parameters are set to values higher than the ones on a lower nesting level (e.g. in the following code setting *theta0* > *theta2*). This probably stems from the following fact observed in [3], p. 12:
 
-*
-First note that for nested Archimedean copulas based on generators belonging to the same
-Archimedean family, all implemented families indeed lead to proper copulas if the generators
-on a more nested (inner) level have larger parameter values than the ones on a lower (outer)
-level. This is equivalent to saying that Kendall’s tau for a pair of random variables having
-a bivariate Archimedean copula which resides on a deeper nesting level as margin has to be
-larger than or equal to the one for a pair of random variables having an Archimedean marginal
-copula residing on a lower nesting level.
-*
+*First note that for nested Archimedean copulas based on generators belonging to the same Archimedean family, all implemented families indeed lead to proper copulas if the generators on a more nested (inner) level have larger parameter values than the ones on a lower (outer) level. This is equivalent to saying that Kendall’s tau for a pair of random variables having a bivariate Archimedean copula which resides on a deeper nesting level as margin has to be larger than or equal to the one for a pair of random variables having an Archimedean marginal copula residing on a lower nesting level.*
 
 Code and some plots follow.
 
