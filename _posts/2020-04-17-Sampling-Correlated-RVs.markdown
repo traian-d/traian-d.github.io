@@ -176,7 +176,7 @@ The downside of taking the easy route for sampling is that things become more an
 
 #### Sampling from a nested Frank copula
 
-I've played around a little bit with different copula structures. It's interesting to note that simulation performance degrades very quickly if the outer $\theta$ parameters are set to values higher than the ones on a lower nesting level (e.g. in the following code setting *theta0* > *theta2*). This probably stems from the following fact observed in [3], p. 12:
+I've played around a little bit with different copula structures. It's interesting to note that simulation performance degrades very quickly if the outer $\theta$ parameters are set to values higher than the ones on a lower nesting level (e.g. in the following code setting *tau0* > *tau2*). This probably stems from the following fact observed in [3], p. 12:
 
 *First note that for nested Archimedean copulas based on generators belonging to the same Archimedean family, all implemented families indeed lead to proper copulas if the generators on a more nested (inner) level have larger parameter values than the ones on a lower (outer) level. This is equivalent to saying that Kendall’s tau for a pair of random variables having a bivariate Archimedean copula which resides on a deeper nesting level as margin has to be larger than or equal to the one for a pair of random variables having an Archimedean marginal copula residing on a lower nesting level.*
 
@@ -185,12 +185,12 @@ Code and some plots follow.
 ```R
 library('copula')
 
-theta0 <- copClayton@iTau(0.2)
-theta1 <- copClayton@iTau(0.75)
-theta2 <- copClayton@iTau(0.9)
+tau0 <- copClayton@iTau(0.2)
+tau1 <- copClayton@iTau(0.75)
+tau2 <- copClayton@iTau(0.9)
 
-frank_copula <- onacopula("Frank", C(theta0, c(3,6), C(theta1, c(5,1), C(theta2, c(4,2)))))
-# frank_copula <- onacopula("Frank", C(theta2, c(1, 2, 3, 4, 5, 6)))
+frank_copula <- onacopula("Frank", C(tau0, c(3,6), C(tau1, c(5,1), C(tau2, c(4,2)))))
+# frank_copula <- onacopula("Frank", C(tau2, c(1, 2, 3, 4, 5, 6)))
 
 set.seed(1)
 start_time = Sys.time()
@@ -205,13 +205,13 @@ end_time = Sys.time()
 end_time - start_time
 ```
 
-A 6 dimensional nested Frank copula with the structure *onacopula("Frank", C(theta0, c(3,6), C(theta1, c(5,1), C(theta2, c(4,2)))))*:
+A 6 dimensional nested Frank copula with the structure *onacopula("Frank", C(tau0, c(3,6), C(tau1, c(5,1), C(tau2, c(4,2)))))*:
 
 <div style="text-align:center;margin:20px 0px">
 <img src="/assets/copula_sampling/nested_frank_02_075_09.png" width="400" height="365">
 </div>
 
-A 6 dimensional exchangeable copula with $\theta = 0.9$:
+A 6 dimensional exchangeable copula with $\tau = 0.9$:
 
 <div style="text-align:center;margin:20px 0px">
 <img src="/assets/copula_sampling/exchangeable_frank_09.png" width="400" height="365">
