@@ -19,17 +19,17 @@ $
 \lim_{d \to \infty} var\left(\frac{\|\|X_d\|\|_k}{\mathbb{E}[\|\|X_d\|\|_k]}\right) = 0 \Rightarrow \frac{Dmax_d^k - Dmin_d^k}{Dmin_d^k} \overset{p}{\to} 0
 $
 
-This means that as the number of dimensions grows, it becomes harder and harder to distinguish between the nearest and furthest points - distances between any pair of points simply end up being more and more similar to each other. Moreover, the relative contrast can itself be used to measure how meaningful a certain distance metric for a given dataset and order *k*. 
+This means that as the number of dimensions grows, it becomes harder and harder to distinguish between the nearest and furthest points - distances between any pair of points simply end up being more and more similar to each other. Moreover, this also means that the relative contrast can itself be used to measure how meaningful a certain distance metric is for a given dataset and order *k*. 
 
-Investigating this meaningfulness for a range of k's, the authors conclude that: *the Manhattan distance metric ($L_1$ norm) is consistently more preferable than the Euclidean distance metric ($L_2$ norm) for high dimensional data mining applications.*; furthermore, introducing the concept of a *fractional* distance metric ($k \in (0, 1)$), they also add that *fractional distance metrics provide more meaningful results both from the theoretical and empirical perspective*.
+Investigating this meaningfulness for a range of k's, the authors conclude that: *the Manhattan distance metric ($L_1$ norm) is consistently more preferable than the Euclidean distance metric ($L_2$ norm) for high dimensional data mining applications.*; introducing the concept of a *fractional* distance metric ($k \in (0, 1)$), they also add that *fractional distance metrics provide more meaningful results both from the theoretical and empirical perspective*.
 
 ## Correlated RV's
 
 With these observations in mind, I thought it would be interesting to see how things play out when the data is drawn not from independent, but from correlated rv's.
 
-In [1] the authors gauge the impact of the curse of dimensionality by comparing the ratio of volumes between two hypercubes: one with a side of $l = 1$, one with a side $l'< 1$. As the number of dimensions increases they observe that the ratio $l'/l$ decreases quite rapidly. This means that in order to capture the same ratio of the volume of the big hypercube, $l'$ has to keep growing with the number of dimensions. A cube with $l' = 0.9$ will have $0.9^3 = 0.729$ of the volume of the unit cube. A 4-d hypercube on the other hand will have a share of only $0.9^4=0.656$ of the unit hypercube. 
+In [1] the authors gauge the impact of the curse of dimensionality by comparing the ratio of volumes between two hypercubes: one with a side of $l = 1$, one with a side $l'< 1$. As the number of dimensions increases, they observe that the volume ratio decreases quite rapidly. This means that in order to capture the same ratio of the volume of the big hypercube, $l'$ has to keep growing with the number of dimensions. A cube with $l' = 0.9$ will have $0.9^3 = 0.729$ of the volume of the unit cube. A 4-d hypercube on the other hand will have a share of only $0.9^4=0.656$ of the unit hypercube. 
 
-As a benchmark, I have first replicated *figure 2.6* on page 23 of [1]. You can see that as the dimensionality increases, you need a larger and larger side length for a given volume of the hypercube. In 10 dimensions for example, a hypercube with side length $l' < 0.6$ basically has a volume of 0:
+As a benchmark, I have first replicated *figure 2.6* on page 23 of [1]. You can see that, as the dimensionality increases, you need a larger and larger side length for a given volume of the hypercube. In 10 dimensions for example, a hypercube with side length $l' < 0.6$ basically has a volume of 0:
 
 <div style="text-align:center;margin:20px 0px">
 <img src="/assets/cod/volume_ratio_by_ndim.png" width="400" height="365">
