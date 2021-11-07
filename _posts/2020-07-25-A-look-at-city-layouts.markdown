@@ -2,13 +2,14 @@
 layout: post
 title:  "A Look at City Layouts"
 date:   2020-07-25 20:01:00 +0200
+background: '/img/bg-post.jpg'
 ---
 
 
 Recently, as I was looking for a route on Google Maps, I sort of spontaneously realized that Amsterdam, the city I live in, can have unusually convoluted paths between two points that are quite close to one another on a straight line. Just take a look at the following craziness:
 
 <div style="text-align:center;margin:20px 0px">
-<img src="/assets/city_layouts/long_way_amsterdam.png">
+<img class="img-fluid" src="/assets/city_layouts/long_way_amsterdam.png">
 </div>
 
 To get from one side to the other of a canal that is about 30 m wide you have to take a detour of about 1 km. That's amusingly inefficient! How is it possible for something like this to arise? In this particular case it's quite clear the presence of canals makes things necessarily more complicated for land travelers. Is this, however, a thing that occurs often in Amsterdam? What about other cities without canals? Is there, perhaps, a way to quantify and/or visualize a street network's 'convolutedness'? Answers to these questions and others follow below :)
@@ -26,7 +27,7 @@ While the first thought that comes to mind is to simply randomly sample some nod
 	<tr>
 		<td>
 			<div style="text-align:center;margin:20px 0px">
-			<img src="/assets/city_layouts/amsterdam_grid.png">
+			<img class="img-fluid" src="/assets/city_layouts/amsterdam_grid.png">
 			</div>
 		</td>
 	</tr>
@@ -34,7 +35,7 @@ While the first thought that comes to mind is to simply randomly sample some nod
 		<tr>
 		<td>
 			<div style="text-align:center;margin:20px 0px">
-			<img src="/assets/city_layouts/amsterdam_street_pts.png">
+			<img class="img-fluid" src="/assets/city_layouts/amsterdam_street_pts.png">
 			</div>
 		</td>
 	</tr>
@@ -57,19 +58,19 @@ Taking a look at some histograms, it seems that in Amsterdam the street distance
 It's also important to note that the distance ratios can be very high, sometimes even larger than 30 (i.e. the street distance is more than 30 times longer than the straight line distance).
 
 <div style="text-align:center;margin:20px 0px">
-<img src="/assets/city_layouts/amsterdam_histograms.png">
+<img class="img-fluid" src="/assets/city_layouts/amsterdam_histograms.png">
 </div>
 
 A kernel density estimate shows clearly what was already suspected, namely that Noord is not well linked to the rest of the city. For pedestrians this is somewhat less of an issue since there is a free ferry service that runs quite often, but drivers do have to take huge detours sometimes.
 
 <div style="text-align:center;margin:20px 0px">
-<img src="/assets/city_layouts/amsterdam_with_weights.png">
+<img class="img-fluid" src="/assets/city_layouts/amsterdam_with_weights.png">
 </div>
 
 As a benchmark, I also included a kernel density estimate with unweighted observations. In this case the density is quite uniform (with small clusters around the sampled points). The difference between the two images clearly shows the impact of adding weights to the estimator:
 
 <div style="text-align:center;margin:20px 0px">
-<img src="/assets/city_layouts/amsterdam_no_weights.png">
+<img class="img-fluid" src="/assets/city_layouts/amsterdam_no_weights.png">
 </div>
 
 
@@ -78,13 +79,13 @@ As a benchmark, I also included a kernel density estimate with unweighted observ
 In Bucharest things look better. The distance ratios are acceptable and the histograms of the distances themselves are unimodal. The longer right tail present in the distance histograms of all cities is, I think, due to the fact that points at the edge of a city tend to have fewer close neighbors and are therefore further away from all other points in the sample. This is, I think, simply a hallmark of the data.
 
 <div style="text-align:center;margin:20px 0px">
-<img src="/assets/city_layouts/bucharest_histograms.png">
+<img class="img-fluid" src="/assets/city_layouts/bucharest_histograms.png">
 </div>
 
 Since there are quite few areas with very large distance ratios, in the case of Bucharest I made an estimate only for areas with a ratio >= 1.25.
 
 <div style="text-align:center;margin:20px 0px">
-<img src="/assets/city_layouts/bucharest_with_weights_dist_geq_125.png">
+<img class="img-fluid" src="/assets/city_layouts/bucharest_with_weights_dist_geq_125.png">
 </div>
 
 #### Manhattan
@@ -92,7 +93,7 @@ Since there are quite few areas with very large distance ratios, in the case of 
 Manhattan is, as expected, the easiest to move about it. Distance histograms are again skewed (reflecting perhaps also the length and narrowness of the island), but distance ratios look quite good.
 
 <div style="text-align:center;margin:20px 0px">
-<img src="/assets/city_layouts/manhattan_histograms.png">
+<img class="img-fluid" src="/assets/city_layouts/manhattan_histograms.png">
 </div>
 
 Even a weighted density estimate ends up being quite uniform in this case. The only way to detect some sort of hotspots is to do an estimate only for places with distance ratios >= 1.5. 
@@ -101,12 +102,12 @@ Even a weighted density estimate ends up being quite uniform in this case. The o
 	<tr>
 		<td>
 			<div style="text-align:center;margin:20px 0px">
-			<img src="/assets/city_layouts/manhattan_with_weights.png">
+			<img class="img-fluid" src="/assets/city_layouts/manhattan_with_weights.png">
 			</div>
 		</td>
 		<td>
 			<div style="text-align:center;margin:20px 0px">
-			<img src="/assets/city_layouts/manhattan_with_weights_dist_geq_15.png">
+			<img class="img-fluid" src="/assets/city_layouts/manhattan_with_weights_dist_geq_15.png">
 			</div>
 		</td>
 	</tr>
@@ -115,7 +116,7 @@ Even a weighted density estimate ends up being quite uniform in this case. The o
 The hotspot towards the north of the island seems to correspond to the entrance to the George Washington Bridge. The ramps and other infrastructure surrounding the bridge seem hard to traverse for pedestrians.
 
 <div style="text-align:center;margin:20px 0px">
-<img src="/assets/city_layouts/manhattan_gw_bridge.png">
+<img class="img-fluid" src="/assets/city_layouts/manhattan_gw_bridge.png">
 </div>
 
 ### Conclusion

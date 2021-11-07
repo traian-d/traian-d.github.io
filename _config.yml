@@ -1,13 +1,18 @@
-title: "traian-d blog"
-author: ""
-description: >-
-  Things I find interesting.
-url: "http://traian-d.github.io"
-github_username: "traian-d"
+title:              overthoughts and easy pieces
+# description:        <add description>
+author:             traian
+# baseurl:            "/startbootstrap-clean-blog-jekyll"
+url:                "https://traian-d.github.io"
 
+# Social Profiles
+github_username:    traian-d 
+# linkedin_username:
 
 # Build settings
-markdown: kramdown
-theme: minima
+markdown:           kramdown
+paginate:           7
+paginate_path:      "/posts/page:num/"
 plugins:
   - jekyll-feed
+  - jekyll-paginate
+  - jekyll-sitemap ## Uncomment this line to silently generate a sitemaps.org compliant sitemap for your Jekyll site

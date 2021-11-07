@@ -2,6 +2,7 @@
 layout: post
 title:  "Sampling from Correlated Random Variables"
 date:   2020-04-17 22:59:00 +0100
+background: '/img/bg-post.jpg'
 ---
 
 Sampling from correlated random variables is part of a growing series of tasks that at first sight seemed trivial to me, but that on further inspection prove to be quite tricky. Since now I'm working towards a bigger post on the curse of dimensionality, one of the things I needed to do was to somehow sample from a bunch of correlated random variables. More so, what I wanted to have was a distribution with uniform marginals.

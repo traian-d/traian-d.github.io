@@ -2,6 +2,7 @@
 layout: post
 title:  "A Note on Injecting Inequality"
 date:   2020-03-06 19:47:00 +0200
+background: '/img/bg-post.jpg'
 ---
 
 
@@ -34,12 +35,12 @@ We can quickly verify this by drawing 10000 samples from $$X \sim N(0, 1)$$ and 
 	<tr>
 		<td>
 			<div style="text-align:center;margin:20px 0px">
-			<img src="/assets/inequality/linear_transform_hist.png">
+			<img class="img-fluid" src="/assets/inequality/linear_transform_hist.png">
 			</div>
 		</td>
 		<td>
 			<div style="text-align:center;margin:20px 0px">
-			<img src="/assets/inequality/exp_transform_hist.png">
+			<img class="img-fluid" src="/assets/inequality/exp_transform_hist.png">
 			</div>
 		</td>
 	</tr>
@@ -63,13 +64,13 @@ To make the simulation more grounded in reality, I have derived $$\mu$$, $$\sigm
 The dataset has 21455 observations corresponding to 6062 individual athletes. It seems that only times up to 11s were kept, giving the empirical distribution a truncated aspect:
 
 <div style="text-align:center;margin:20px 0px">
-<img src="/assets/inequality/athlete_data_trunc.png">
+<img class="img-fluid" src="/assets/inequality/athlete_data_trunc.png">
 </div>
 
 Since I wanted to avoid this artifact, I only kept results from athletes whose mean times were <= 10.685 s. This yields a symmetric, normal-looking distribution:
 
 <div style="text-align:center;margin:20px 0px">
-<img src="/assets/inequality/athlete_data_detrunc.png">
+<img class="img-fluid" src="/assets/inequality/athlete_data_detrunc.png">
 </div>
 
 The simulation was parametrized with empirical estimates from this de-truncated data.
@@ -105,12 +106,12 @@ For proportional linear rewards at the end of the simulation the totals are dist
 	<tr>
 		<td>
 			<div style="text-align:center;margin:20px 0px">
-			<img src="/assets/inequality/simple_proportional_rewards.png">
+			<img class="img-fluid" src="/assets/inequality/simple_proportional_rewards.png">
 			</div>
 		</td>
 		<td>
 			<div style="text-align:center;margin:20px 0px">
-			<img src="/assets/inequality/lpr_boxplot.png">
+			<img class="img-fluid" src="/assets/inequality/lpr_boxplot.png">
 			</div>
 		</td>
 	</tr>
@@ -124,12 +125,12 @@ In this case we see a comparatively wider distribution of final rewards, as well
 	<tr>
 		<td>
 			<div style="text-align:center;margin:20px 0px">
-			<img src="/assets/inequality/exp_proportional_rewards.png">
+			<img class="img-fluid" src="/assets/inequality/exp_proportional_rewards.png">
 			</div>
 		</td>
 		<td>
 			<div style="text-align:center;margin:20px 0px">
-			<img src="/assets/inequality/epr_boxplot.png">
+			<img class="img-fluid" src="/assets/inequality/epr_boxplot.png">
 			</div>
 		</td>
 	</tr>
@@ -143,12 +144,12 @@ It's interesting to note that rank rewards lead to a far higher variance in outc
 	<tr>
 		<td>
 			<div style="text-align:center;margin:20px 0px">
-			<img src="/assets/inequality/linear_rewards.png">
+			<img class="img-fluid" src="/assets/inequality/linear_rewards.png">
 			</div>
 		</td>
 		<td>
 			<div style="text-align:center;margin:20px 0px">
-			<img src="/assets/inequality/lr_boxplot.png">
+			<img class="img-fluid" src="/assets/inequality/lr_boxplot.png">
 			</div>
 		</td>
 	</tr>
@@ -162,12 +163,12 @@ Snooker rewards are the only ones that are truly capable of producing a long-tai
 	<tr>
 		<td>
 			<div style="text-align:center;margin:20px 0px">
-			<img src="/assets/inequality/snooker_rewards.png">
+			<img class="img-fluid" src="/assets/inequality/snooker_rewards.png">
 			</div>
 		</td>
 		<td>
 			<div style="text-align:center;margin:20px 0px">
-			<img src="/assets/inequality/sr_boxplot.png">
+			<img class="img-fluid" src="/assets/inequality/sr_boxplot.png">
 			</div>
 		</td>
 	</tr>

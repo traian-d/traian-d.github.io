@@ -2,6 +2,7 @@
 layout: post
 title:  "Dependence and the Curse of Dimensionality"
 date:   2020-05-20 22:47:00 +0100
+background: '/img/bg-post.jpg'
 ---
 
 [The curse of dimensionality](https://en.wikipedia.org/wiki/Curse_of_dimensionality) is a generic name for a host of problems that can arise when working in high dimensional spaces. It seems to me that the crux of the problem here is the way metrics behave with an increase in the number of dimensions. One nice illustration of the concept can be found in section 2.5 of [1]. There the authors consider the case of running a nearest-neighbor algorithm on a set of points that are uniformly distributed in a large number of dimensions. They notice that the size of a "local" neighborhood as a share of the total dataset grows quite quickly with the number of dimensions. This means essentially that it becomes harder and harder to have distinct neighborhoods for each point - once the number of dimensions is large enough, most points will be in the "local" neighborhood of most other points. 

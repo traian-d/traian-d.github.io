@@ -2,6 +2,7 @@
 layout: post
 title:  "Cosines and Correlations"
 date:   2020-03-23 18:17:00 +0100
+background: '/img/bg-post.jpg'
 ---
 
 This is a small note in which I would like to clarify an idea that I held intuitively, but that I never really understood rigorously: namely that correlations between random variables are in a certain way like cosines between vectors.

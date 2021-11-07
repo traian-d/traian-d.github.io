@@ -2,6 +2,7 @@
 layout: post
 title:  "A 2048 Pi Bot"
 date:   2018-05-12 14:28:41 +0200
+background: '/img/bg-post.jpg'
 ---
 
 
@@ -17,7 +18,7 @@ A while back I received a Raspberry Pi as a present. After a bit of procrastinat
 The goal here would be to start with an image like this:
 
 <div style="text-align:center;margin:20px 0px">
-<img src="/assets/image403.jpg">
+<img class="img-fluid" src="/assets/image403.jpg">
 </div>
 
 and extract out of it a matrix containing all the numbers in the 2048 game grid in their corresponding positions.
@@ -75,7 +76,7 @@ So far, the original image has been processed to the following (in bold you can 
 
 
 <div style="text-align:center;margin:20px 0px">
-<img src="/assets/contour_on_edges.jpg">
+<img class="img-fluid" src="/assets/contour_on_edges.jpg">
 </div>
 
 
@@ -97,7 +98,7 @@ warped_image = cv2.warpPerspective(image, M, (max_width, max_height))
 This yields the following:
 
 <div style="text-align:center;margin:20px 0px">
-<img src="/assets/warped_game_grid.jpg">
+<img class="img-fluid" src="/assets/warped_game_grid.jpg">
 </div>
 
 In this image it's quite easy to identify the exact position of each game cell since I know exactly what the relative cell and border dimensions are (it can be found out by doing an inspect element on the 2048 game site). The procedure is quite tedious and it involves a bunch of hard-coded coordinates, so I won't go into it in detail.
@@ -138,7 +139,7 @@ One issue that popped up in practice, and that I will have to deal with in a fol
 Overlapping model predictions on the original image, the end result is as follows:
 
 <div style="text-align:center;margin:20px 0px">
-<img src="/assets/predicted_numbers.jpg">
+<img class="img-fluid" src="/assets/predicted_numbers.jpg">
 </div>
 
 In practice, running everything on the Raspberry Pi and overlaying the results in real time looks something like this:

@@ -2,6 +2,7 @@
 layout: post
 title:  "A toolbox for cellular automata"
 date:   2018-12-11 23:13:41 +0200
+background: '/img/bg-post.jpg'
 ---
 
 I will come out and say it: I like engineering software. I still have a lot to learn, but I enjoy thinking about software architecture, about abstracting things out, generalizing algorithms, code reuse, testability etc. In my daily work this often puts me at odds with those who tend to think that everything beyond procedural-style code with endlessly nested if/else statements is over-engineering.
