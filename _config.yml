@@ -1,11 +1,10 @@
 title:              overthoughts and easy pieces
-description:        simple tech blog
+description:        a simple tech blog
 author:             traian
 url:                "https://traian-d.github.io"
 
 # Social Profiles
-github_username:    traian-d 
-# linkedin_username:
+github_username:    traian-d
 
 # Build settings
 markdown:           kramdown
